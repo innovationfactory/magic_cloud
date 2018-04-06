@@ -125,7 +125,7 @@ module MagicCloud
 
       smin = norm.call(words.map(&:last).min)
       smax = norm.call(words.map(&:last).max)
-      koeff = (FONT_MAX - FONT_MIN).to_f / (smax - smin)
+      koeff = (FONT_MAX - FONT_MIN).to_f / ((smax - smin).nonzero? || 1)
 
       ->(_word, size, _index){
         ssize = norm.call(size)
